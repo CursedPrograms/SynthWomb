@@ -6,6 +6,9 @@ key/
 
 models/
 training_data/
+dist/
+build/
+main.spec/
 
 # C extensions
 *.so
