@@ -15,7 +15,7 @@ This versatile Python codebase introduces a Generative Adversarial Network (GAN)
 <br>
 <div align="center">
 <a href="https://github.com/SynthWomb" target="_blank" align="center">
-    <img src="https://github.com/SynthWomb/synth.womb/blob/main/logos/synthwomb-promo.png"
+    <img src="https://github.com/SynthWomb/synth.womb/blob/main/logos/synthwomb-promo01.png"
         alt="SynthWomb">
 </a>
 </div>
