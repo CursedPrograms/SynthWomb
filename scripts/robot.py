@@ -15,8 +15,8 @@ import pyaudio
 import speech_recognition as sr
 import wave
 from play_audio import play_audio
-from ..scripts.gpt.system.generate_text import generate_text
-from ..scripts.gpt.system.clean_text import clean_text
+from gpt.system.generate_text import generate_text
+from gpt.system.clean_text import clean_text
 import sys
 
 transformers.logging.set_verbosity_error()
