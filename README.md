@@ -20,6 +20,7 @@ This versatile Python codebase includes a Generative Adversarial Network (GAN) d
 <br>
 ## Requirements:
 <br>
+
 ```bash
 transformers==4.37.1
 torch==1.10.0
