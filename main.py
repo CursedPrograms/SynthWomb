@@ -1,8 +1,10 @@
 import os
+import time
 import subprocess
 import speech_recognition as sr
 from gtts import gTTS
 import json
+from scripts.play_audio import play_audio
 
 def read_config():
     with open('settings.json', 'r') as config_file:
@@ -14,11 +16,14 @@ def greet_user():
     robot_name = config.get("robot_name", "")
     print(f"Welcome to {robot_name}.")
     greeting_text = f"Greetings, human. I am {robot_name}. How may I assist you today?"
-    os.makedirs('output', exist_ok=True)
+    output_directory = 'output/audio'
+    os.makedirs(output_directory, exist_ok=True) 
     tts = gTTS(text=greeting_text, lang='en')
-    tts.save('output/greeting.mp3')
-    os.system("start output/greeting.mp3")
-
+    tts.save(os.path.join(output_directory, "greeting.mp3"))
+    time.sleep(1)
+    audio_path = ("output/audio/greeting.mp3")
+    play_audio(audio_path)
+    
 def main():
     greet_user()
 
