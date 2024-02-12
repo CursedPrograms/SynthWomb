@@ -5,11 +5,13 @@
 </a>
 </div>
 <br>
-The SynthWomb or Synthia project leverages the Hugging Face Transformers library to interact with a pre-trained GPT-2 model. TensorFlow is employed for effective model management, and AutoTokenizer ensures efficient tokenization. The script allows users to interactively input prompts, generating text responses from the GPT-2 model. To enhance the user experience, unnecessary warning messages related to the transformers library are intelligently suppressed.
 
-Additionally, the project incorporates the DeepFace library in conjunction with OpenCV to extract gender information from input data, with the results of gender prediction being displayed. Furthermore, the SDXL-Turbo model is utilized for diverse image processing tasks. The project offers a straightforward command-line interface, enabling both Text-to-image and Image-to-image operations. Users can easily select an operation, input prompts, and witness the script dynamically generating and executing code snippets.
+The SynthWomb, or Synthia, seamlessly integrates multiple technologies in a unified project. Powered by the Hugging Face Transformers library, it engages with a pre-trained GPT-2 model. TensorFlow ensures efficient model management, while AutoTokenizer streamlines tokenization for optimal performance. Users interactively input prompts, prompting the GPT-2 model to generate text responses. To refine the user experience, extraneous warning messages tied to the transformers library are intelligently silenced.
 
-This versatile Python codebase includes a Generative Adversarial Network (GAN) designed for the training and generation of AI art, adding an artistic dimension to the project's capabilities.
+Expanding its capabilities, the project integrates the DeepFace library with OpenCV to extract gender information from input data, presenting gender predictions visually. The SDXL-Turbo model is harnessed for diverse image processing tasks. The project's command-line interface facilitates both Text-to-image and Image-to-image operations, empowering users to seamlessly select operations, input prompts, and witness dynamic script execution.
+
+This versatile Python codebase introduces a Generative Adversarial Network (GAN) tailored for training and generating AI art. This addition brings an artistic dimension to the project's repertoire, enhancing its overall capabilities.
+
 <br>
 <div align="center">
 <a href="https://github.com/SynthWomb" target="_blank" align="center">
