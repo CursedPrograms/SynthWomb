@@ -1,0 +1,80 @@
+:root {
+    --main-bg-color: #1F5B94;
+    --accent-color: #79B5EE;
+    --dark-bg-color: #012C54;
+    --text-color: #fff;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.content {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--dark-bg-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: var(--accent-color);
+}
+
+.user-message {
+    background-color: var(--accent-color);
+    color: var(--dark-bg-color);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.synth-message {
+    background-color: var(--dark-bg-color);
+    color: var(--text-color);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Footer styles */
+#dynamicFooter {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    text-align: center;
+}
