@@ -109,7 +109,7 @@ chmod +x setup.sh
 - [GloriosaAI](https://github.com/CursedPrograms/GloriosaAI)
 - [Gender-Age-ID](https://github.com/CursedPrograms/Gender-Age-ID)
 - [Detect-Face](https://github.com/CursedPrograms/Detect-Face)
-- [Cursed GPT](https://github.com/CursedPrograms/Cursed-GPT)
+- [Cursed-GPT](https://github.com/CursedPrograms/Cursed-GPT)
 - [Image-Generator](https://github.com/CursedPrograms/Image-Generator)
 
 <br>
