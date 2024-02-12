@@ -18,7 +18,9 @@ This versatile Python codebase includes a Generative Adversarial Network (GAN) d
 </a>
 </div>
 <br>
+
 ## Requirements:
+
 <br>
 
 ```bash
