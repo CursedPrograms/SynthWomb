@@ -39,6 +39,8 @@ This versatile Python codebase introduces a Generative Adversarial Network (GAN)
 
 - **video_encoder.py:** Encode a video using SynthWombAI
 - **install_dependencies.py:** Install dependencies
+- **image_generator.py:** Generate AI art
+- **image_generator.py:** Display webcam
 
 ### /scripts/ai_trainer
 
@@ -67,6 +69,7 @@ This versatile Python codebase introduces a Generative Adversarial Network (GAN)
 - **stt.py:** Speech-to-text
 - **tts.py:** Text-to-speech
 - **capture_photo.py:** Capture photo with webcam
+- **play_audio.py:** Play generated audio
 
 <br>
 <div align="center">

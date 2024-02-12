@@ -5,6 +5,7 @@ import logging
 from system.generate_text import generate_text
 from system.tts import text_to_speech
 
+
 transformers.logging.set_verbosity_error()
 tf.get_logger().setLevel(logging.ERROR)
 

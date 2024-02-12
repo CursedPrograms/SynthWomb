@@ -12,7 +12,7 @@ def text_to_speech(text):
     os.makedirs(os.path.dirname(audio_path), exist_ok=True)
 
     tts.save(audio_path)
-
+    
     # Open the audio file with the default media player
     try:
         subprocess.run(["start", audio_path], check=True, shell=True)

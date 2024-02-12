@@ -14,11 +14,17 @@ import numpy as np
 import pyaudio
 import speech_recognition as sr
 import wave
+from play_audio import play_audio
+from gpt.system.generate_text import generate_text
+from gpt.system.clean_text import clean_text
+import sys
 
 transformers.logging.set_verbosity_error()
 tf.get_logger().setLevel(logging.ERROR)
 
 import urllib.request
+
+sys.stdout = open(os.devnull, 'w')
 
 def download_file(url, save_path):
     urllib.request.urlretrieve(url, save_path)
@@ -76,7 +82,7 @@ def extract_gender_and_age(frame, face_cascade):
         print(f"Error: {e}")
         return frame
 
-def capture_audio(duration=5, sample_rate=44100):
+def capture_audio(duration=30, sample_rate=44100):
     p = pyaudio.PyAudio()
     stream = p.open(format=pyaudio.paInt16,
                     channels=1,
@@ -112,43 +118,16 @@ def capture_audio(duration=5, sample_rate=44100):
 
 def text_to_speech(text):
     cleaned_text = clean_text(text)
-    tts = gTTS(text=cleaned_text, lang='en', slow=False)    
-    audio_path = "output/audio/output.mp3"
+    
+    # Generate a unique filename with a timestamp
+    timestamp = int(time.time())
+    audio_path = f"output/audio/output_{timestamp}.mp3"
+
     os.makedirs(os.path.dirname(audio_path), exist_ok=True)
 
+    tts = gTTS(text=cleaned_text, lang='en', slow=False)
     tts.save(audio_path)
-
-    # Open the audio file with the default media player
-    try:
-        subprocess.run(["start", audio_path], check=True, shell=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Error: {e}")
-
-def generate_text(prompt, model, tokenizer, max_length=50):
-    inputs = tokenizer.encode(prompt, return_tensors="tf", max_length=max_length, truncation=True)
-    attention_mask = tf.ones_like(inputs)
-    outputs = model.generate(
-        inputs,
-        max_length=max_length,
-        num_beams=5,
-        no_repeat_ngram_size=2,
-        top_k=50,
-        top_p=None,
-        do_sample=True,
-        attention_mask=attention_mask
-    )
-    generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    return generated_text
-
-def clean_text(text):
-    # Remove HTML tags
-    soup = BeautifulSoup(text, "html.parser")
-    cleaned_text = soup.get_text(separator=" ")
-
-    # Remove unwanted characters
-    cleaned_text = cleaned_text.replace("\n", " ").strip()
-
-    return cleaned_text
+    play_audio(audio_path)
 
 def capture_photo(output_dir="output/shot"):
     # Create the output directory if it doesn't exist
@@ -305,4 +284,5 @@ def main():
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
+    sys.stdout = sys.__stdout__
     main()
