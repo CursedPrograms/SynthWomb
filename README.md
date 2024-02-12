@@ -71,4 +71,11 @@ chmod +x setup.sh
     <img src="https://github.com/SynthWomb/synth.womb/blob/main/logos/synthwomb07.png"
         alt="SynthWomb" style="width:200px;"/>
 </a>
+    <br>
+</div>
+<div align="center">
+<a href="https://github.com/CursedPrograms" target="_blank">
+    <img src="https://github.com/CursedPrograms/cursedentertainment/raw/main/images/logos/logo-wide-grey.png"
+        alt="CursedEntertainment Logo" style="width:250px;">
+</a>
 </div>
