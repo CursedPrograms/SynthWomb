@@ -6,9 +6,8 @@ key/
 
 models/
 training_data/
-
 cached_functions.pkl/
-
+static/generated_images/
 
 # PyInstaller
 dist/

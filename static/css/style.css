@@ -1,8 +1,9 @@
 :root {
-    --main-bg-color: #1F5B94;
-    --accent-color: #79B5EE;
-    --dark-bg-color: #012C54;
-    --text-color: #fff;
+    --main-bg-color: #ffffff;
+    --accent-color: #00a1e0; 
+    --content-bg-color: #e5e5e5;
+    --text-color: #333333; 
+    --bg-image-url: url('../images/background.png');
 }
 
 a {
@@ -27,7 +28,11 @@ h1 {
 
 body {
     font-family: Arial, sans-serif;
-    background-color: var(--main-bg-color);
+    background: var(--bg-image-url) no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden; 
+    margin: 0;
+    padding: 0; 
     color: var(--text-color);
     line-height: 1.6;
 }
@@ -38,8 +43,10 @@ body {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: var(--dark-bg-color);
+    background-color: rgba(229, 229, 229, 0.8);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1; 
 }
 
 h1 {
@@ -48,15 +55,15 @@ h1 {
 
 .user-message {
     background-color: var(--accent-color);
-    color: var(--dark-bg-color);
+    color: var(--text-color);
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
 }
 
 .synth-message {
-    background-color: var(--dark-bg-color);
-    color: var(--text-color);
+    background-color: var(--text-color);
+    color: var(--main-bg-color);
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -80,7 +87,7 @@ input {
 }
 
 button {
-    background-color: var(--accent-color);
+    background-color: #00a1e0; 
     color: var(--text-color);
     padding: 10px;
     border: none;
@@ -89,13 +96,13 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #00567f; 
 }
 
 #dynamicFooter {
     margin-top: 20px;
     padding: 10px;
     color: var(--text-color);
-    color: white;
+    color: white; /* This line seems redundant, consider removing it */
     text-align: center;
 }
