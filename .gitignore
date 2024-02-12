@@ -6,6 +6,12 @@ key/
 
 models/
 training_data/
+unprocessed_images
+
+# PyInstaller
+dist/
+build/
+main.spec/
 
 # C extensions
 *.so
