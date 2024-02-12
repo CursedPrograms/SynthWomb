@@ -76,6 +76,11 @@ To make the setup script executable, run the following command in your terminal:
 ```bash
 chmod +x setup.sh
 ```
+- [Gender-Age-ID Repository](https://github.com/CursedPrograms/Gender-Age-ID)
+- [Detect-Face Repository](https://github.com/CursedPrograms/Detect-Face)
+- [Cursed GPT](https://github.com/CursedPrograms/Cursed-GPT)
+- [Image-Generator](https://github.com/CursedPrograms/Image-Generator)
+
 <br>
 <div align="center">
 <a href="https://github.com/SynthWomb" target="_blank" align="center">
