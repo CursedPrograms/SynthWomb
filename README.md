@@ -35,29 +35,47 @@ This versatile Python codebase introduces a Generative Adversarial Network (GAN)
 - **main.py:** The selection menu for SynthWomb
 - **app.py:** Run SynthiaGPT as a web-server
 
-### /scripts/
+### /scripts
+
+- **video_encoder.py:** Encode a video using SynthWombAI
+- **install_dependencies.py:** Install dependencies
+
+### /scripts/ai_trainer
+
+- **trainer.py:** Runs SynthWombAI trainer
+- **modelout.py:** Output images from trained models with SynthWomb
+- **image-processor.py:** Prepare images for SynthWombAI
+- **preprocessor_data.py:** Dependency for SynthWombAI /trainer
+
+### /scripts/gender_age_prediction
+
+- **gender_predictor.py:** Predicts gender from an input
+- **gender_age_predictor.py:** Predicts gender and age from an input
+- **gender_age_predictor_webcam.py:** Predicts gender and age from a webcam feed
+
+### /scripts/gpt
 
 - **transformer.py:** Run SynthiaGPT
 - **transformer_t2s.py:** Run SynthiaGPT with text-to-speech functionality
 - **transformer_s2t2s.py:** Run SynthiaGPT with speech-to-text-to-speech functionality
 - **transformer_webcam.py:** Run SynthiaGPT with webcam functionality
-- **gender_predictor.py:** Predicts gender from an input
-- **gender_age_predictor.py:** Predicts gender and age from an input
-- **gender_age_predictor_webcam.py:** Predicts gender and age from a webcam feed
-- **trainer.py:** Runs SynthWombAI trainer
-- **modelout.py:** Output images from trained models with SynthWomb
-- **video_encoder.py:** Encode a video using SynthWombAI
-- **image-processor.py:** Prepare images for SynthWombAI
-- **preprocessor_data.py:** Dependency for SynthWombAI /trainer
-- **install_dependencies.py:** Install dependencies
 
-### /scripts/system
+### /scripts/gpt/system
 
 - **generate_text.py:** The GPT text generator
 - **clean_text.py:** Clean text from recorded voice audio
 - **stt.py:** Speech-to-text
 - **tts.py:** Text-to-speech
 - **capture_photo.py:** Capture photo with webcam
+
+<br>
+<div align="center">
+<a href="" target="_blank">
+    <img src="https://github.com/SynthWomb/Synthia/raw/main/demo_images/synthia00-cover.png"
+        alt="SynthiaGPT">
+</a>
+</div>
+<br>
 
 ## Requirements:
 
