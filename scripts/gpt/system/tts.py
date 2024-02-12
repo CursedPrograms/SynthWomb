@@ -3,6 +3,9 @@ import subprocess
 from gtts import gTTS
 import speech_recognition as sr
 from .clean_text import clean_text
+import sys
+sys.path.append(".")
+from ...play_audio import play_audio
 
 def text_to_speech(text):
     cleaned_text = clean_text(text)
@@ -12,9 +15,4 @@ def text_to_speech(text):
     os.makedirs(os.path.dirname(audio_path), exist_ok=True)
 
     tts.save(audio_path)
-
-    # Open the audio file with the default media player
-    try:
-        subprocess.run(["start", audio_path], check=True, shell=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Error: {e}")
+    play_audio(audio_path)

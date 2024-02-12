@@ -23,33 +23,33 @@ def greet_user():
     time.sleep(1)
     audio_path = ("output/audio/greeting.mp3")
     play_audio(audio_path)
-    
+
 def main():
     greet_user()
 
     scripts = {
         "1": {
-            "name": "Run ai_trainer/'main.py'",
+            "name": "Run ai_trainer/'ai_trainer.py'",
             "description": "Train an image GAN, encode videos and output .h5 models",
-            "file_name": "scripts/ai_trainer/main.py",
+            "file_name": "scripts/ai_trainer/ai_trainer.py",
             "phrases": ["one", "image GAN trainer"]
         },
         "2": {
-            "name": "Run gender_age_prediction/'main.py'",
+            "name": "Run gender_age_prediction/'gender_age_prediction.py'",
             "description": "Predict age and gender of a given image",
-            "file_name": "scripts/gender_age_prediction/main.py",
+            "file_name": "scripts/gender_age_prediction/gender_age_prediction.py",
             "phrases": ["two", "gender age prediction"]
         },
         "3": {
-            "name": "Run gpt/'main.py'",
+            "name": "Run gpt/'gpt.py'",
             "description": "Run a GPT, that includes a Text-to-Speech module to make it talk",
-            "file_name": "scripts/gpt/main.py",
+            "file_name": "scripts/gpt/gpt.py",
             "phrases": ["three", "GPT"]
         },
         "4": {
-            "name": "Run 'detect_face.py'",
+            "name": "Run 'face_detection.py'",
             "description": "Detect a face in an image",
-            "file_name": "scripts/face_detection/main.py",
+            "file_name": "scripts/face_detection/face_detection.py",
             "phrases": ["four", "detect face"]
         },
         "5": {
