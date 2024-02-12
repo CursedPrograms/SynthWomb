@@ -30,6 +30,35 @@ This versatile Python codebase introduces a Generative Adversarial Network (GAN)
 </div>
 <br>
 
+## Scripts:
+
+- **main.py:** The selection menu for SynthWomb
+- **app.py:** Run SynthiaGPT as a web-server
+
+### /scripts/
+
+- **transformer.py:** Run SynthiaGPT
+- **transformer_t2s.py:** Run SynthiaGPT with text-to-speech functionality
+- **transformer_s2t2s.py:** Run SynthiaGPT with speech-to-text-to-speech functionality
+- **transformer_webcam.py:** Run SynthiaGPT with webcam functionality
+- **gender_predictor.py:** Predicts gender from an input
+- **gender_age_predictor.py:** Predicts gender and age from an input
+- **gender_age_predictor_webcam.py:** Predicts gender and age from a webcam feed
+- **trainer.py:** Runs SynthWombAI trainer
+- **modelout.py:** Output images from trained models with SynthWomb
+- **video_encoder.py:** Encode a video using SynthWombAI
+- **image-processor.py:** Prepare images for SynthWombAI
+- **preprocessor_data.py:** Dependency for SynthWombAI /trainer
+- **install_dependencies.py:** Install dependencies
+
+### /scripts/system
+
+- **generate_text.py:** The GPT text generator
+- **clean_text.py:** Clean text from recorded voice audio
+- **stt.py:** Speech-to-text
+- **tts.py:** Text-to-speech
+- **capture_photo.py:** Capture photo with webcam
+
 ## Requirements:
 
 <br>
