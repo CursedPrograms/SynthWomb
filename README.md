@@ -25,6 +25,29 @@ Expanding its capabilities, the project integrates the DeepFace library with Ope
 This versatile Python codebase introduces a Generative Adversarial Network (GAN) tailored for training and generating AI art. This addition brings an artistic dimension to the project's repertoire, enhancing its overall capabilities.
 
 <br>
+
+## How to Run:
+
+```bash
+pip install -r requirements.txt
+```
+```bash
+pip install torch torchvision torchaudio
+```
+```bash
+python main.py
+```
+```bash
+python app.py
+```
+<br>
+
+To make the setup script executable, run the following command in your terminal:
+
+```bash
+chmod +x setup.sh
+```
+<br>
 <div align="center">
 <a href="https://github.com/SynthWomb" target="_blank" align="center">
     <img src="https://github.com/SynthWomb/synth.womb/blob/main/logos/synthwomb-promo01.png"
@@ -106,29 +129,6 @@ pydub==0.25.1
 beautifulsoup4==4.10.0
 SpeechRecognition==3.10.1
 pygame==2.5.2
-```
-<br>
-
-## How to Run:
-
-```bash
-pip install -r requirements.txt
-```
-```bash
-pip install torch torchvision torchaudio
-```
-```bash
-python main.py
-```
-```bash
-python app.py
-```
-<br>
-
-To make the setup script executable, run the following command in your terminal:
-
-```bash
-chmod +x setup.sh
 ```
 
 <br>
