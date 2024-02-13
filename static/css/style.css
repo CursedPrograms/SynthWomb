@@ -30,9 +30,6 @@ body {
     font-family: Arial, sans-serif;
     background: var(--bg-image-url) no-repeat center center fixed;
     background-size: cover;
-    overflow: hidden; 
-    margin: 0;
-    padding: 0; 
     color: var(--text-color);
     line-height: 1.6;
 }

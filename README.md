@@ -128,6 +128,15 @@ To make the setup script executable, run the following command in your terminal:
 chmod +x setup.sh
 ```
 
+<br>
+<div align="center">
+<a href="" target="_blank">
+    <img src="https://github.com/SynthWomb/Synthia/raw/main/demo_images/screenshot.png"
+        alt="SynthiaGPT">
+</a>
+</div>
+<br>
+
 - [GloriosaAI](https://github.com/CursedPrograms/GloriosaAI)
 - [Gender-Age-ID](https://github.com/CursedPrograms/Gender-Age-ID)
 - [Detect-Face](https://github.com/CursedPrograms/Detect-Face)
