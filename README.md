@@ -5,6 +5,7 @@
 <div align="center">
     <img alt="TensorFlow" src="https://img.shields.io/badge/tensorflow%20-%231F5B94.svg?&style=for-the-badge&logo=tensorflow&logoColor=white"/>
     <img alt="Flask" src="https://img.shields.io/badge/flask%20-%231F5B94.svg?&style=for-the-badge&logo=flask&logoColor=white"/>
+  <img alt="OpenCV" src="https://img.shields.io/badge/opencv-%231F5B94.svg?&style=for-the-badge&logo=opencv&logoColor=white"/>
 </div>
 <br>
 <div align="center">
