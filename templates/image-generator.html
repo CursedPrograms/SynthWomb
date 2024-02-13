@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="content">
-    <h1>SDXL-Turbo Model Card</h1>
+    <h1>Image-Generator</h1>
     <form action="/text_to_image" method="post">
         <label for="prompt">Enter a text prompt:</label>
         <input type="text" name="prompt" required>
@@ -23,7 +23,7 @@
     </form>
 
     <div id="imagecontainer">
-        <h1>Image Generation</h1>
+        <h1>Generated Image:</h1>
         {% if result_image %}
             <h2>Result Image:</h2>
             <img src="{{ url_for('static', filename='generated_images/' + result_image) }}" alt="Result Image">
@@ -32,7 +32,7 @@
     <a href="{{ url_for('home') }}">Go to SynthWomb</a>
     <br>
 <div align="center">
-    <img src="https://github.com/SynthWomb/synth.womb/raw/main/logos/synthwomb07.png" alt="Synth Womb Logo" width="200">
+    <img src="https://github.com/SynthWomb/synth.womb/raw/main/logos/synthwomb08.png" alt="Synth Womb Logo" width="200">
 </div>
 </div>
     <footer id="dynamicFooter"></footer>

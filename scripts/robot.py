@@ -18,6 +18,10 @@ from play_audio import play_audio
 from gpt.system.generate_text import generate_text
 from gpt.system.clean_text import clean_text
 import sys
+import webbrowser
+from PIL import Image
+import glob
+import os
 
 transformers.logging.set_verbosity_error()
 tf.get_logger().setLevel(logging.ERROR)
@@ -44,37 +48,38 @@ def download_caffe_model_files():
     download_file(caffemodel_url, caffemodel_path)
 
 def extract_gender_and_age(frame, face_cascade):
-    try:
-        # Convert the frame to RGB (required by DeepFace)
-        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    global subject_age, subject_gender
+    subject_age = None
+    subject_gender = None
 
-        # Use Haar Cascade to detect faces
+    try:
+        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray_frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
 
         for (x, y, w, h) in faces:
-            # Extract face region
             face_roi = frame[y:y+h, x:x+w]
+            result = DeepFace.analyze(face_roi, actions=['gender', 'age'], enforce_detection=False)
 
-            # Use DeepFace to analyze gender and age
-            result = DeepFace.analyze(face_roi, actions=['gender', 'age'])
+            if 'gender' in result[0] and 'age' in result[0]:
+                gender_stats = result[0]['gender']
+                age = int(result[0]['age'])
+                print("Predicted Gender:", gender_stats)
+                print(f"Predicted Gender: {max(gender_stats, key=gender_stats.get)}")
+                print("Predicted Age:", age)
+                text_to_speech(f"Predicted Age: {age}")
+                text_to_speech(f"Predicted Gender: {gender_stats}")
+                text_to_speech(f"You are a {max(gender_stats, key=gender_stats.get)}")
 
-            gender_stats = result[0]['gender']
-            age = int(result[0]['age'])
-            print("Predicted Gender:", gender_stats)
-            print("Predicted Age:", age)
+                subject_age = age
+                subject_gender = (f"You are a {max(gender_stats, key=gender_stats.get)}")
+                gender = max(gender_stats, key=gender_stats.get)
 
-            # Select the dominant gender label
-            gender = max(gender_stats, key=gender_stats.get)
-
-            # Display gender and age information on the frame
-            cv2.putText(frame, f"Gender: {gender} - {gender_stats[gender]:.2f}%", (x, y - 10),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
-            cv2.putText(frame, f"Age: {age} years", (x, y + h + 20),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
-
-            # Draw rectangle around the face
-            cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+                cv2.putText(frame, f"Gender: {gender} - {gender_stats[gender]:.2f}%", (x, y - 10),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
+                cv2.putText(frame, f"Age: {age} years", (x, y + h + 20),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, cv2.LINE_AA)                
+                cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
 
         return frame
 
@@ -82,7 +87,7 @@ def extract_gender_and_age(frame, face_cascade):
         print(f"Error: {e}")
         return frame
 
-def capture_audio(duration=30, sample_rate=44100):
+def capture_audio(duration=15, sample_rate=44100):
     p = pyaudio.PyAudio()
     stream = p.open(format=pyaudio.paInt16,
                     channels=1,
@@ -92,19 +97,18 @@ def capture_audio(duration=30, sample_rate=44100):
 
     frames = []
     print("Recording audio...")
-
+    text_to_speech("I am listening...")
     for i in range(0, int(sample_rate / 1024 * duration)):
         data = stream.read(1024)
         frames.append(data)
 
     print("Finished recording.")
+    text_to_speech("I am thinking...")
     stream.stop_stream()
     stream.close()
     p.terminate()
 
     audio_data = np.frombuffer(b''.join(frames), dtype=np.int16)
-
-    # Save audio data to a temporary file
     temp_audio_file = "output/audio/temp_audio.wav"
     os.makedirs(os.path.dirname(temp_audio_file), exist_ok=True)
     wf = wave.open(temp_audio_file, 'wb')
@@ -118,38 +122,24 @@ def capture_audio(duration=30, sample_rate=44100):
 
 def text_to_speech(text):
     cleaned_text = clean_text(text)
-    
-    # Generate a unique filename with a timestamp
     timestamp = int(time.time())
     audio_path = f"output/audio/output_{timestamp}.mp3"
-
     os.makedirs(os.path.dirname(audio_path), exist_ok=True)
-
     tts = gTTS(text=cleaned_text, lang='en', slow=False)
     tts.save(audio_path)
     play_audio(audio_path)
 
 def capture_photo(output_dir="output/shot"):
-    # Create the output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
-
-    # Open a connection to the webcam
     cap = cv2.VideoCapture(0)
-
-    # Capture a single frame
     ret, frame = cap.read()
-
-    # Release the webcam
     cap.release()
-
-    # Save the captured frame to the specified directory
     image_path = os.path.join(output_dir, "captured_photo.jpg")
     cv2.imwrite(image_path, frame)
 
     return image_path
 
 def image_description(image_path):
-    # Load the pre-trained MobileNet SSD model and its class labels
     net = cv2.dnn.readNetFromCaffe("models/deploy.prototxt", "models/mobilenet_iter_73000.caffemodel")
     classes = ["background", "aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair",
                "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa",
@@ -159,8 +149,6 @@ def image_description(image_path):
     image = cv2.imread(image_path)
     h, w = image.shape[:2]
     blob = cv2.dnn.blobFromImage(image, 0.007843, (300, 300), 127.5)
-
-    # Pass the blob through the network and obtain the detections
     net.setInput(blob)
     detections = net.forward()
 
@@ -169,18 +157,19 @@ def image_description(image_path):
         confidence = detections[0, 0, i, 2]
         if confidence > 0.5:  # Confidence threshold
             class_id = int(detections[0, 0, i, 1])
-            description = f"A photo containing a {classes[class_id]} with confidence {confidence:.2f}"
+            print(f"A photo containing a {classes[class_id]} with {confidence:.2f}")
+            description = f"I am looking at a {classes[class_id]}"
+            text_to_speech(f"A photo containing a {classes[class_id]} with {confidence:.2f}")
             return description
 
     return "Unable to identify the content of the photo."
 
-def text_to_image(prompt):
+def text_to_image(prompt, output_directory='output/generated_images'):
     print("Using SDXL-Turbo for Text-to-image:")
     print("Make sure to install the required packages using:")
     print("pip install diffusers transformers accelerate --upgrade")
     print()
 
-    output_directory = 'output/generated_images'
     os.makedirs(output_directory, exist_ok=True)
 
     # Use a counter to create a unique filename
@@ -198,15 +187,21 @@ pipe = AutoPipelineForText2Image.from_pretrained("stabilityai/sdxl-turbo", torch
 pipe.to("cpu")
 prompt = "{prompt}"
 image = pipe(prompt=prompt, num_inference_steps=1, guidance_scale=0.0).images[0]
-image.save(os.path.join(output_directory, '{output_filename}'))
+image.save(os.path.join('{output_directory}', '{output_filename}'))
     """
 
     print("Generated code snippet:")
     print(text_to_image_code)
 
     exec(text_to_image_code)
+    text_to_speech("I drew this:")
+    return Image.open(os.path.join(output_directory, output_filename))
 
 def main():
+
+    output_directory = 'output/generated_images'
+    os.makedirs(output_directory, exist_ok=True)
+
     # Load GPT-2 model for text generation
     model_name = "gpt2"
     gpt_model = TFAutoModelForCausalLM.from_pretrained(model_name)
@@ -224,13 +219,38 @@ def main():
     # Speech recognizer
     recognizer = sr.Recognizer()
 
+    image_displayed = False
+
     while True:
+
+        if not image_displayed:
+
+            mp3_files = glob.glob("output/audio/*.mp3")
+            for mp3_file in mp3_files:
+                os.remove(mp3_file)
+
+            text_to_speech("Hello")
+            
+            initial_prompt = "A Robotic Lady"
+            initial_generated_image = text_to_image(initial_prompt, output_directory)
+
+            # Save the JpegImageFile object to a file
+            initial_generated_image_path = os.path.join(output_directory, "initial_generated_image.jpg")
+            initial_generated_image.save(initial_generated_image_path)
+
+            # Open the saved image using the default image viewer
+            webbrowser.open(initial_generated_image_path)            
+
+            # Set the flag to True to indicate that the image has been displayed
+            image_displayed = True
+
         # Capture video from webcam
         ret, frame = cap.read()
 
         # Check if frame is valid
         if not ret:
             print("Error: Couldn't capture frame from the webcam.")
+            text_to_speech("Error: Couldn't capture frame from the webcam.")
             break
 
         # Apply face detection and gender/age analysis to the frame
@@ -250,39 +270,39 @@ def main():
                 audio = recognizer.record(source)
                 audio_text = recognizer.recognize_google(audio)
                 print(f"Audio Text: {audio_text}")
+                text_to_speech(f"Audio Text: {audio_text}")
             except sr.UnknownValueError:
                 print("Could not understand audio.")
+                text_to_speech("Could not understand audio.")
             except sr.RequestError as e:
                 print(f"Error with the speech recognition service; {e}")
-
-        # Construct prompt based on gender, age, audio, and image description
-        gender_prompt = "man" if "man" in frame else "woman" if "woman" in frame else "person"
-        age_prompt = "33"  # Replace with the detected age
+        gender_prompt = subject_gender
+        age_prompt = str(subject_age) if subject_age else ""
         image_desc = image_description(captured_image_path)
 
         prompt = f"A {gender_prompt} {age_prompt}, {audio_text}, {image_desc}"
-
-        # Generate text based on the prompt
         generated_text = generate_text(prompt, gpt_model, tokenizer)
-
-        # Print and say the generated text
         if generated_text:
             print("Generated Text:")
             print(generated_text)
             text_to_speech(generated_text)
-
-        # Draw an image based on the prompt
         if prompt:
-            text_to_image(prompt)
-
-        # Break the loop when 'q' key is pressed
+            generated_image = text_to_image(prompt, output_directory)
+            text_to_speech(f"I am drawing a: {prompt}")
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
-    # Release the webcam and close all windows
-    cap.release()
+        generated_image_path = os.path.join(output_directory, "initial_generated_image.jpg")
+        generated_image.save(initial_generated_image_path)
+
+        webbrowser.open(generated_image_path)   
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+        
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     sys.stdout = sys.__stdout__
     main()
+         
