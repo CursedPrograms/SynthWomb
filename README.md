@@ -131,7 +131,7 @@ chmod +x setup.sh
 <br>
 <div align="center">
 <a href="" target="_blank">
-    <img src="https://github.com/SynthWomb/Synthia/raw/main/demo_images/screenshot.png"
+    <img src="https://github.com/SynthWomb/SynthWomb/blob/main/demo_images/screenshot.png"
         alt="SynthiaGPT">
 </a>
 </div>
